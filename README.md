@@ -1,6 +1,6 @@
-# R-tistic
+# R-Playground
 
-Repo for reproducible, open source classes using R.
+Repo for documenting R packages that I explored. Many of them will find use in the R-tistic class. http://www.lse.de/r-tistic
 
 ## License
 
