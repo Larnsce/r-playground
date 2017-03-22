@@ -1,0 +1,42 @@
+---
+title: "diagrams"
+author: "Lars Schoebitz"
+date: "24 January 2017"
+output: html_document
+---
+
+```{r, echo = FALSE}
+
+library(DiagrammeR)
+
+grViz("
+digraph boxes_and_circles {
+
+## make some boxes
+
+node [shape = box,
+fontname = Helvetica]
+primary; secondary; tertiary, advanced
+
+## make some circles
+
+node [shape = circle,
+fontname = Helvetica]
+hello
+2
+3
+4
+
+# connect boxes and circles
+
+primary -> not achieved
+secondary -> 2 
+tertiary -> 3 
+advanced -> 4
+
+}
+
+")
+
+
+```

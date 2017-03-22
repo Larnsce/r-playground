@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Presentations with the xaringan package</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Lars Schoebitz" />
+    <link rel="stylesheet" href="my-theme-2.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+# Title slide
+
+Presentations with the xaringan package
+
+---
+
+The [xaringan](https://github.com/yihui/xaringan) R package was created by [Yihui Xie](http://yihui.name/), a software engineer at RStudio Inc. and also author of the amazing packages [knitr](http://yihui.name/knitr), [bookdown](https://bookdown.org), [blogdown](https://github.com/rstudio/blogdown) and many other great R packages. Xaringan slides are based on [remark.js](https://remarkjs.com), , and [RMarkdown](https://rmarkdown.rstudio.com).
+
+The point of these slides is to document my steps for learning how to work out the xaringan package. I am using RMarkdown and xaringan itself to produce these slides. 
+
+---
+# First steps
+
+What I found most useful is [Yihui's slides](https://slides.yihui.name/xaringan/#1) that explain the first steps and left me with a great impression on what is possible with this package. On slide, it is suggested to read the [remark.js Wiki](https://github.com/gnab/remark/wiki), which seemed a bit daunting to me in the beginning but once I had gont through "Getting started" and "How it works", which I didn't really need to understand, it all started making sense.
+
+While going through the wiki, it is ideal to already have an RMarkdown document open, which has the required xaringan information the YAML header. I walked through the wiki, testing each command and had an immediate feeling of success each time I hit the "knit" button. 
+
+---
+# Explore the possibilities
+
+As with any new R package I learn, I take some time to explore it's possibilities and try to note what I like and what I don't like about it. Using xaringan, I noticed pretty quickly that I thought the font size was too small, at least for using the presentation at a conference with people sitting far away from the projection. Obviously, this is adjustable, but it takes a while to figure out how to do it, especially if knowledge mark up languages like CSS is lacking. The great think about learning R packages is that you are usually not alone in not knowing something that you need to know in order to get the result that you want. And the great thing about the R community is that it is responsive to requests that to a software engineer may seem ridiculous. 
+
+---
+# The xaringan wiki
+
+Searching the web for solutions, it is Yihui himself who produced a [xaringan wiki](https://github.com/yihui/xaringan/wiki) that provided me with the solution to my problem. In his wiki, he describes the steps that are necessary to implement if there is a desire to change the design of the provided slides. Walk through it and hopefully you will also be as enlightened as I was. 
+
+---
+# Exporting slides to PDF and OpenSSL
+
+The one part that was challenging for me was to get my slides to export to PDF. While installing [decktape.js](https://github.com/astefanutti/decktape) worked out for me by using the terminal, I kept getting the same error message when getting to the step "Usage": `dyld: Library not loaded: /usr/local/opt/openssl/lib/libssl.1.0.0.dylib`. 
+
+I neither understood the message nor did any of my Google search help until I finally found this short [tutorial](https://solitum.net/openssl-os-x-el-capitan-and-brew/). Being ignorant and naive, I walked through the steps and did what I was told to do, investing some trust into the internet. Luckily, it walked worked and I could now start using decktape.js to export my slides to PDF.
+
+---
+# Thanks Yihui...
+
+...for creating another great package and brilliant documentation for people that ain't software engineers!
+
+---
+# And anything that came after
+
+I started being more interested in CSS and started learning it by checking out the [w3school tutorials](https://www.w3schools.com/css/default.asp).
+
+---
+# Fonts
+
+This really helps for font selection: https://google-webfonts-helper.herokuapp.com/fonts/amiri?subsets=latin
+
+---
+# maybe the header has to have a certain number of characters
+.theme[
+.pull-left[
+- check this out
+- then this
+- now this
+]
+
+.pull-right[
+- Look here
+- and here
+- then here
+]
+]
+
+---
+# A loooooooooooooooooooong header 
+.theme[
+- and 2 
+- and a pretty long number three 
+- bullet points on one slide to see what happens 
+- 4th bullet point and enough for one slide 
+]
+
+---
+# borders
+
+.b_red[hi my name is ]
+
+
+---
+# buttons
+
+.button[here is a link for you] 
+
+.button1[[My Homepage](https://www.lse.de)]
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true
+});
+if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
+
+  </body>
+</html>

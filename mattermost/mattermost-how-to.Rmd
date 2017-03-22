@@ -1,0 +1,89 @@
+---
+title: "Docker and Mattermost"
+author: "Lars Schoebitz"
+date: "28 February 2017"
+output: html_document
+---
+    
+
+---
+# Comman Line Interface
+
+??? 
+add a screenshot and ask who has seen/used it before. Then ask who uses Mac and who Windows
+
+---
+# CLI
+
+1. Familiarise yourself with the Terminal/(Windows?)
+    - CLI (command line interface)
+    - use `pwd`
+    - use `date`
+
+???
+this should explain the concept a bit. play around with some commands and let everyone have some fun.
+
+
+---
+# What is Docker?
+
+???
+
+Explain what Docker is. Need to install Docker on everyones machine. Images, containers, etc. 
+https://docs.docker.com/engine/getstarted/step_two/
+
+--- 
+# Install Docker
+
+
+Install Docker on your machine 
+    - Mac: https://docs.docker.com/docker-for-mac/
+    - Windows: https://docs.docker.com/docker-for-windows/
+    
+---
+# What is Mattermost
+
+???
+Explain why I would like to use this tool. Get some nice examples, etc.
+
+---
+# Open Source Software
+
+???
+Explain the concept, the difference to paid software and why its more secure
+
+---
+# Install Mattermost
+
+1. Open Terminal or other Shell?
+2. Run: `docker run --name mattermost-preview -d --publish 8065:8065 mattermost/mattermost-preview`
+3. When docker is done fetching the image, open http://localhost:8065/ in your browser.
+
+Documentation: https://docs.mattermost.com/install/docker-local-machine.html#mac-os-x-and-windows-10
+
+---
+# Create an account
+
+4. sign up through email I just sent to you
+
+---
+# Play around!
+
+...
+
+---
+# Mattermost User's Guide
+
+https://docs.mattermost.com/guides/user.html
+do
+
+
+---
+# Try this
+
+- in terminal: `docker stop mattermost-preview`
+- in terminal: `docker start mattermost-preview`
+
+http://localhost:8065/r-tistic
+
+

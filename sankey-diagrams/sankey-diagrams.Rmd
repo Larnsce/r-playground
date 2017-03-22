@@ -1,0 +1,85 @@
+---
+title: "Untitled"
+author: "Lars Schoebitz"
+date: "14 February 2017"
+output: html_document
+---
+
+I have been trying to build sankey diagrams in R for a long time now and it has never really worked out for me. I will document the steps I am going through this time better to understand what my specific problems and questions are.
+
+# Sankey with GoogleVis
+
+The code is taken from
+
+http://www.magesblog.com/2014/03/sankey-diagrams-with-googlevis.html
+
+```{r}
+
+# Data source: http://goo.gl/vcKo6y
+
+UKvisits <- data.frame(origin=c(
+  "France", "Germany", "USA",
+  "Irish Republic", "Netherlands",
+  "Spain", "Italy", "Poland",
+  "Belgium", "Australia", 
+  "Other countries", rep("UK", 5)),
+  visit=c(
+    rep("UK", 11), "Scotland",
+    "Wales", "Northern Ireland", 
+    "England", "London"),
+  weights=c(
+    c(12,10,9,8,6,6,5,4,4,3,33)/100*31.8, 
+    c(2.2,0.9,0.4,12.8,15.5)))
+## Uncomment the next 3 lines to install the developer version of googleVis
+# install.packages(c("devtools","RJSONIO", "knitr", "shiny", "httpuv"))
+# library(devtools)
+# install_github("mages/googleVis")
+require(googleVis)
+plot(
+  gvisSankey(UKvisits, from="origin", 
+             to="visit", weight="weight",
+             options=list(
+               height=250,
+               sankey="{link:{color:{fill:'lightblue'}}}"
+               ))
+)
+
+```
+
+Now let me try and use a dataframe that I created myself
+
+```{r}
+
+library(googleVis)
+library(readr)
+
+data <- read_csv(file = "data.csv")
+
+plot(
+  gvisSankey(data = data, from = "from", to = "to", weight = "weight",
+             options = list(
+               height = 500,
+               sankey="{link:{color:{fill:'lightblue'}}}"
+             ))
+)
+
+```
+
+And I will produce another one
+
+```{r}
+
+library(googleVis)
+library(readr)
+
+data2 <- read_csv(file = "data2.csv")
+
+plot(
+  gvisSankey(data = data2, from = "from", to = "to", weight = "weight",
+             options = list(
+               height = 500,
+               sankey="{link:{color:{fill:'lightblue'}}}"
+             ))
+)
+
+```

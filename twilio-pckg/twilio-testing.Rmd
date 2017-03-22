@@ -1,0 +1,64 @@
+---
+title: "Twilio Package"
+author: "Lars Schoebitz"
+date: "3/9/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Twilio
+
+I found twilio through this blogpost: http://seankross.com/2017/03/07/Send-a-Text-from-R-with-Twilio.html
+
+## set-up
+
+Firstly, get an account on:
+
+Then, get your SID and token.
+
+- click on the dropdown menu on the top right corner
+- then click "Account" and you will see your Account Settings
+- go to API Credentials and then note the TEST credentials
+    - to see the TEST ATHTOKEN, click on the eye next to the hidden characters
+- verify your phone number under "User Settings" on the left
+- click on "trial restrictions" in the top right corner
+    - click on "get your first twilio phone number" under step 2 of getting started
+    - set up a phone number that can receive and send SMS
+
+
+Install the package: 
+
+`install.packages("twilio")`
+
+This can be done in the console.
+
+Load the package and follow instructions
+
+```{r}
+
+library(twilio)
+
+# First you need to set up your accound SID and token as environmental variables
+
+Sys.setenv(TWILIO_SID = "AC9190304e7ef403670255af4f1e5a25a9")
+Sys.setenv(TWILIO_TOKEN = "32899ff4863780bf0da175e4607f327d")
+
+# Then we're just going to store the numbers in some variables
+my_number <- "+41788240611"
+twilio_number <- "+41798073668"
+
+twilio::tw_send_message(my_number, twilio_number, "hey")
+
+# this doesn't work
+tw_send_message(to = "41788240611",
+                from = "41790873668", 
+                body = "Hello from R 👋")
+
+ 
+```
+
+
+

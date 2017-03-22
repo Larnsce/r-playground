@@ -1,0 +1,28 @@
+---
+title: "Interactive Documents"
+author: "Lars Schoebitz"
+date: "23 January 2017"
+output: html_document
+---
+
+### Dropdown menus in R Markdown with bsselectR
+
+The documentation can be found here:
+
+http://walkerke.github.io/2016/12/rmd-dropdowns/
+
+```{r}
+
+library(bsselectR)
+
+quotes <- c("Look deep into nature, and then you will understand everything better.", 
+            "A fool thinks himself to be wise, but a wise man knows himself to be a fool.", 
+            "My mission in life is not merely to survive, but to thrive; and to do so with some passion, some compassion, some humor, and some style.")
+
+names(quotes) <- c("Einstein", "Shakespeare", "Angelou")
+
+bsselect(quotes, type = "text")
+
+```
+
+

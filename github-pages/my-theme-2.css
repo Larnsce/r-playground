@@ -1,0 +1,112 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700bold);
+
+
+h1, h2, h3 {
+  font-family: 'Helvetica'; 
+  color: #105b76;
+  font-weight: bold;
+}
+
+body { 
+  font-family: 'Helvetica';
+  color: #2f8dab;
+  font-weight: lighter;
+}
+a, a > code {
+  color: #105b76;
+  text-decoration: none;
+  font-weight: bold;
+}
+.footnote {
+  position: absolute;
+  bottom: 0.1em;
+  padding-right: 4em;
+  font-size: 50%;
+}
+.remark-code, .remark-inline-code { font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace; }
+.remark-code-line-highlighted     { background-color: #ffff88; }
+
+.inverse {
+  background-color: #105b76;
+  color: #d6d6d6;
+  text-shadow: 0 0 20px #333;
+}
+.inverse h1, .inverse h2, .inverse h3 {
+  color: #f3f3f3;
+  line-height: 1.0em;
+}
+.pull-left {
+  float: left;
+  width: 49%;
+}
+.pull-right {
+  float: right;
+  width: 49%;
+}
+.pull-right ~ * {
+  clear: both;
+}
+img {
+  width: 900px;
+  height: 500px;
+}
+blockquote {
+  border-left: solid 5px lightgray;
+  padding-left: 1em;
+}
+
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+.theme { 
+  line-height: 1.2em;
+  font-size: 200%;
+}
+.small { 
+  font-size: 50%;
+}
+
+.smallblack { 
+  font-size: 50%;
+  color: black;
+}
+
+.big{
+  font-size: 120%;
+}
+
+.large {
+  font-size: 150%;
+}
+
+.superlarge{
+  font-size: 800%;
+  font-weight: bold;
+}
+
+.b_red {
+    border: 5px solid red;
+}
+
+.button1 {
+    background-color: white; 
+    color: black; 
+    border: 4px solid #2f8dab;
+    border-radius: 8px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 150%;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1:hover {
+    color: white;
+    background-color: #2f8dab;
+}
+

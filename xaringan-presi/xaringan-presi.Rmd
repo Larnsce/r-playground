@@ -1,0 +1,127 @@
+---
+title: "Learning xaringan"
+subtitle: "test slides"
+author: "Lars Schoebitz"
+date: "23 January 2017"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+# 2nd slide
+
+- bullet one
+  - bullet two
+  
+1. hi
+3. hi again
+
+---
+# 3rd slide
+
+- testing now code from interactive-docs.Rmd
+  - text below box does not respond to change
+
+```{r bsselectR, echo = FALSE}
+
+library(bsselectR)
+
+quotes <- c("Look deep into nature, and then you will understand everything better.", 
+            "A fool thinks himself to be wise, but a wise man knows himself to be a fool.", 
+            "My mission in life is not merely to survive, but to thrive; and to do so with some passion, some compassion, some humor, and some style.")
+
+names(quotes) <- c("Einstein", "Shakespeare", "Angelou")
+
+bsselect(quotes, type = "text")
+
+```
+
+---
+# 4th slide
+
+- just adding a bit of R code
+
+```{r}
+
+head(cars)
+
+
+```
+
+---
+# 5th slide - ggplot2
+
+- adding a plot
+  - figure out how to change ratio of plot
+
+```{r plot, echo = FALSE}
+
+library(ggplot2)
+
+ggplot(cars, aes(x = speed, y = dist)) +
+  geom_point(stat = "identity") +
+  theme_bw(base_size = 30)
+
+```
+
+---
+# 6th slide
+
+- writing in two columns
+
+.pull-left[
+- write some text
+- and some more
+- can even make a footnote `*`
+]
+
+.pull-right[
+1. ordered list
+1. another point
+1. and a third one
+]
+
+.footnote[[*] Not really. See next page.]
+
+---
+# 7th slide
+
+.pull-left[
+```{r plot2, echo = FALSE, cache = TRUE}
+
+ggplot2::ggplot(cars, aes(y = speed, x = dist)) +
+  geom_point(stat = "identity") +
+  theme_bw(base_size = 15)
+
+```
+]
+
+.pull-right[
+1. ordered list
+1. another point
+1. and a third one
+]
+
+---
+# 8th slide
+- using leaflet
+  - **learn about leaflet coordinates**
+
+```{r out.width='100%', fig.height=6, eval=require('leaflet')}
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%
+  setView(-93.65, 42.0285, zoom = 17)
+
+
+```
+
+

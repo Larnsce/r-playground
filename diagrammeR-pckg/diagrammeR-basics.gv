@@ -1,0 +1,57 @@
+
+digraph dot {
+      
+## make some boxes
+
+graph [layout = dot, rankdir = LR]
+
+node [
+  shape = box,
+  style = filled
+ #color = grey
+ #label = ''
+  ]
+
+B C D E F 
+
+## make some trangles
+
+node [
+  shape = triangle, 
+  fontname = Helvetica
+  ]
+  
+X Y
+
+## make some circles
+
+node [
+  shape = circle, 
+  fontname = Helvetica,
+  fillcolor = white]
+  
+primary;
+secondary;
+tertiary;
+advanced
+
+node [fillcolor = orange]
+g h i j k l 
+
+edge [color = red, arrowhead = none]
+
+
+# connect boxes and circles
+primary -> a -> A -> secondary
+secondary ->  l 
+tertiary -> X -> k
+advanced -> {Y, B, C, D, E}
+F -> {g, h, i, j}
+Y -> j
+i -> a
+primary -> X
+
+}
+
+
+

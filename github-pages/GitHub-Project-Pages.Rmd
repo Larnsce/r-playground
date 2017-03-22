@@ -1,0 +1,25 @@
+---
+title: "GitHub Pages Setup"
+author: "Lars Schoebitz"
+date: "1 March 2017"
+output: html_document
+---
+
+# Personal GitHub Pages
+
+## Project Pages
+
+this worked well:
+
+http://blog.revolunet.com/blog/2015/07/15/beautiful-static-website-in-minutes-with-github/
+
+
+with CLI still to be figured out properly:
+
+https://help.github.com/articles/creating-project-pages-using-the-command-line/
+
+1. Clone repository
+2. cd to repository
+3. creat gh-pages branch with `git checkout --orphan master`
+4. remove all files (not sure why!)
+5. add content and `git push origin gh-pages` 

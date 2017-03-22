@@ -1,0 +1,176 @@
+---
+title: "test-presi"
+author: "Lars Schoebitz"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    self_contained: FALSE
+    seal: FALSE
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+    navigation: 
+      click: true
+---
+
+```{r setup, include=FALSE}
+
+options(htmltools.dir.version = FALSE)
+
+```
+
+# Here is my title slide
+
+normal text
+.small[small text]
+.large[large text]
+
+---
+class: inverse
+# This is the second slide
+
+it has class inverse, center, middle as it's setting
+
+- or use the [RStudio Addin](https://rstudio.github.io/rstudioaddins/)<sup>2</sup> "Infinite Moon Reader" to live preview the slides (every time you update and save the Rmd document, the slides will be automatically reloaded in RStudio Viewer.
+
+--
+
+[2] See [#2](https://github.com/yihui/xaringan/issues/2) if you do not see the template or addin in RStudio.
+]
+
+---
+background-image: url(`r "figs/Hkys9Ar.jpg"`)
+background-position: 50% 50%
+class: center, bottom
+
+# You only live once!
+
+---
+class: center
+
+# a new slide
+## what happens with a different heading
+.left[how about some left aligned text here?]
+#### and another one
+
+.center[- #I would like to write some centered text]
+.right[now some right aligned text]
+
+.footnote[.red.bold[*] Important footnote]
+
+---
+
+.left[![Right-aligned image](figs/FSM4_logo.svg)]
+
+---
+# Slidy slide
+
+Some content. 
+
+and more content
+
+???
+Some note. Ah that means I can write basically anything here! Cooooool
+also here? 
+
+what about here?
+no. so anything after ??? is actually just a note 
+
+---
+name: world
+
+# World
+
+---
+# testing the link
+
+[the world](#world)
+
+---
+# testing another link
+
+slideshow.gotoSlide('agenda')
+
+---
+count: false
+# do not count this slide
+
+---
+# now count this one again
+
+---
+exclude: true
+
+# Section XYZ
+
+---
+
+# now we include me again
+
+
+Code:
+
+```ruby
+def add(a,b)
+  a + b
+end
+```
+
+
+[links](), **formatting**, and <del>tags</del> supported
+
+---
+# some other cool stuff
+
+<del>here is some deleted text</del>  
+~~hello hello~~
+
+```{r, echo = FALSE}
+
+#hi
+library(ggplot2)
+
+ggplot(cars, aes(x = speed, y = dist)) +
+  geom_point()
+
+```
+
+---
+# Highlighting code
+
+If I use write some like `this` then it's written as code.
+
+And when I do this 
+```
+- code 1
+- code 2
+- code 3
+```
+---
+
+# Including a cool datatable
+
+
+
+```{r eval=require('DT'), tidy=FALSE}
+
+DT::datatable(
+  cars, extensions = 'Buttons', options = list(
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print')
+  )
+)
+
+```
+
+---
+
+# what does this look like?
+
+```{r eval=require('DT'), tidy=FALSE}
+DT::datatable(
+  head(iris, 10),
+  fillContainer = FALSE, options = list(pageLength = 5)
+)
+```

@@ -1,0 +1,13 @@
+---
+title: "Bitnami Rails Development Container"
+author: "Lars Schoebitz"
+date: "3/17/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+- go to: https://github.com/bitnami/bitnami-docker-rails
+

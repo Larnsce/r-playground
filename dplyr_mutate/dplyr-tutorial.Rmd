@@ -1,0 +1,25 @@
+---
+title: '`dplyr` mutate package'
+author: "Lars Schoebitz"
+date: "8 March 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Use dplyr mutate in a pipe to change classes of variables !!! 
+
+```{r}
+
+  mutate(
+    year = make_date(year)
+  ) %>%
+  mutate(
+    percent = as.integer(perc)
+  )
+
+```
+

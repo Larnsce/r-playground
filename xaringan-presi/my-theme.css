@@ -1,0 +1,18 @@
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700);
+
+h1 {
+  font-size: 4em;
+}
+
+h2 {
+  font-size: 10em;
+}
+
+h3 {
+  font-size:0.5em;
+}
+
+.large { font-size: 300% }
+.small { font-size: 50% }
