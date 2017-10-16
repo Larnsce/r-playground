@@ -1,0 +1,28 @@
+---
+title: "Flex Dashboard"
+author: "Lars Schoebitz"
+date: "June 23, 2017"
+output: html_document
+---
+
+# Getting Started
+
+http://rmarkdown.rstudio.com/flexdashboard/
+
+```{r}
+
+install.packages("flexdashboard")
+
+```
+
+## Use htmlwidgets
+
+http://www.htmlwidgets.org/
+
+[Showcase](http://www.htmlwidgets.org/showcase_leaflet.html)
+
+
+
+## Using Flex Dashboard
+
+http://rmarkdown.rstudio.com/flexdashboard/using.html#components

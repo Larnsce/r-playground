@@ -1,0 +1,29 @@
+---
+title: "Working with json files"
+author: "Lars Schoebitz"
+date: "23 March 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This file explores the World Bank Projects dataset downloaded from https://datahub.io/dataset/world-bank-project-database. The dataset comes as a json file, which is the first time I experience working with such a file. Therefore I am using the opportunity to explore working with json files on this data set.
+
+# Install packages
+
+```{r, eval = FALSE}
+
+install.packages("rjson")
+
+library(rjson) 
+
+json_data <- fromJSON(file = "http://go.worldbank.org/KTPE1WKU20") ## tried to use the URL but didn't work
+
+data = fromJSON(file = "datapackage.json") ## this worked, while `json_str` didn't work
+
+data
+
+```
+

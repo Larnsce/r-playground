@@ -1,0 +1,20 @@
+---
+title: '`skimr`package'
+author: "Lars Schoebitz"
+date: "28 May 2017"
+output: html_document
+---
+
+# Install + load
+
+```{r}
+
+# devtools::install_github("hadley/colformat")
+# devtools::install_github("ropenscilabs/skimr")
+
+library(colformat)
+library(skimr)
+
+
+```
+

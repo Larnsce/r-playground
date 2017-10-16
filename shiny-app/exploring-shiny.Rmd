@@ -1,0 +1,531 @@
+---
+title: "Gettin Started with Shiny"
+author: "Lars Schoebitz"
+date: "22 March 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Intro
+
+The purpose of this document is to document the steps taken to build my first Shiny app in R. 
+
+## Building a Shiny App
+
+The steps taken to build a Shiny App are copied from the following website: [Zev Ross - Know Your Data ](http://zevross.com/blog/2016/04/19/r-powered-web-applications-with-shiny-a-tutorial-and-cheat-sheet-with-40-example-apps/)]
+
+### Shiny at its simplest
+
+```{r app-1, eval=FALSE}
+
+## load shiny library
+library(shiny)
+
+## build first app
+server <- function(input, output, session) { }          # this is the server
+
+ui <- basicPage("the is a real Shiny app")              # the user interface
+
+shinyApp(ui = ui, server = server)                      # this launches the app
+
+
+```
+
+### Set up your user interface (UI)
+
+- Shiny uses Twitter Bootstrap
+- possibility to use HTML templates but much easier to use predefined layout functions
+- we are using `sidebarLayout`
+- other layout functions can be found [here](http://shiny.rstudio.com/articles/layout-guide.html)
+
+```{r app-2, eval = FALSE}
+
+## load shiny library
+library(shiny)
+
+## server
+server <- function(input, output, session) { }      
+
+## user interface
+ui <- fluidPage(
+    titlePanel("App with simple layout"),
+    
+    sidebarLayout(
+        
+        sidebarPanel(
+            "Sidebar"
+        ), #end sidebarpanel 
+        
+        mainPanel(
+            "This is the main panel"
+        ) #end mainpanel
+    ) #end sidebarlayout
+)
+
+## launch the app
+
+shinyApp(ui = ui, server = server) 
+
+
+```
+
+### Adding elements with tags$xxx
+
+- HTML elements can be added by using HTML tages. [See here](http://shiny.rstudio.com/articles/tag-glossary.html) for catalogue
+- usage: `tags$OBJECT`
+    - `tags$p` for paragraph
+    - `tags$blockquote` for a blockquote
+- for some common tags, helper functions exist, e.g. `h1()` for heading 
+
+```{r app-3, eval = FALSE}
+
+## load shiny library
+library(shiny)
+
+## server
+server <- function(input, output, session) { }    
+
+## user interface
+ui <-  basicPage(
+    h1("Title without tages $."),  
+    tags$h2("But, I could still use tags."),  
+    tags$blockquote("blockquote requires tags, because it's less common than e.g. h1()."),  
+    code("data.frame(a = 1:10, b = 1:10"),   
+    tags$code("The above is just formatted as code, but is actually a character string.")
+)
+
+## launch the app
+shinyApp(ui = ui, server = server)
+
+```
+
+
+### Layout your app Bootstrap’s grid system manually
+
+- more about the bootstrap gridsystem and CSS [here](https://getbootstrap.com/examples/grid/)
+- all Bootstrap layouts are 12 columns across and these columns can be grouped to make wider columns.
+- this time we are using `fluidPage` instead of `basicPage` 
+
+```{r app-4, eval = FALSE}
+
+## load shiny library
+library(shiny)
+
+## server
+server <- function(input, output, session) { }    
+
+## user interface
+
+ui <- fluidPage(
+    
+    fluidRow(
+        column(6, offset = 1,
+               tags$h1("Title in one row")
+        )
+    ),
+    fluidRow(
+        column(1,
+               actionButton("button", "Click")
+        ),
+        column(6,
+               p("Row 2, Column 2 (button is col 1)")
+               )
+    )
+)
+
+## launch the app
+shinyApp(ui = ui, server = server)
+
+```
+
+### Style the user interface
+
+- can choose exitsting themes or style yourself with CSS
+
+#### Using existing theme
+
+- Bootstrap offers a number of themes 
+- the `shinythemes` package allows to take advantage of this
+- only need to add a line of coe to `fluidPage` or `fixedPage` function
+- `basicPage` is not supported because its not based opn Bootstrap
+- [Click here](http://rstudio.github.io/shinythemes/) for a catalogue orf RStudio themes
+- [Click here](http://bootswatch.com) for even more free themes for Bootstrap 
+
+```{r app-5, eval = FALSE}
+
+## load libraries
+library(shiny)
+library(shinythemes)
+
+## server
+server <- function(input, output, session) { }    
+
+## user interface
+
+ui <- fluidPage(theme = shinytheme("cosmo"),
+                
+                titlePanel("Use an existing theme"),
+                
+                sidebarLayout(
+                    
+                    sidebarPanel(
+                        h3("Note the button is black. This is different from the previous app."),
+                        actionButton("button", "A button")
+                    ),
+                    
+                    mainPanel(
+                        tabsetPanel(
+                            tabPanel("Plot"),
+                            tabPanel("Summary"),
+                            tabPanel("Table")
+                        )
+                    )
+                )
+)
+
+## launch the app
+shinyApp(ui = ui, server = server)
+
+
+
+```
+
+#### Style yourself with CSS
+
+- for now, I will use the existing themes and no own CSS stylesheets, however, documentation is available in the blogpost 
+
+```{r app-6, eval = FALSE}
+
+## do not use own CSS styles yet
+
+## load libraries
+library(shiny)
+library(shinythemes)
+
+## server
+server <- function(input, output, session) { }    
+
+## user interface
+
+
+
+```
+
+
+#### Add widgets to user interface (text boxes, sliders etc)
+
+- checkout the [R Studio Widget Gallery](http://shiny.rstudio.com/gallery/widget-gallery.html) for an overview of widgets
+- all widgets have unique input id (`ìnputId`)
+    - text is `mytext`
+    - slider is `myslider`
+    - **input ids must be unique**
+    
+```{r app-7, eval = FALSE}
+
+## load libraries
+library(shiny)
+
+## server
+server <- function(input, output, session) { }    
+
+## user interface
+ui <- basicPage(
+    h3("A couple of simple widgets that don't do anything yet"),
+    
+    # a slider
+    
+    sliderInput(inputId = "myslider", label = "Limit the ", min = 0, max = 100, value = c(40, 60)),
+    
+    # a text input box
+    
+    textInput(inputId = "mytext", label = "Text input", value = "Enter text...")
+)
+
+## launch the app
+shinyApp(ui = ui, server = server)
+
+
+```
+
+### Setup the server
+
+#### Input from your user inteface
+
+- unique input ids
+- all widgets have a unique ID that the server will listen for and react to
+- each of the input ids is mapped to the `ìnput` argument on the server
+    - if you want to access the value of the text box (`mytext`) from within the server, you would call `input$mytext`.
+    - for the slider `input$myslider`
+        - these objects are called reactive values
+        
+
+#### Listen for changes with observe or reactive, the Shiny hearing aids
+
+- showing an example that doesn't work
+- in summary: do not use `print(input$mytext)` in the server function because the reactive value is not being read by a function designed to handle it
+
+#### introduce the update* functions
+
+Using `updateTextInput` as a "console" for this blog post
+
+```{r app-8, eval = FALSE}
+
+## load libraries
+library(shiny)
+
+## server
+server <- function(input, output, session) {
+    
+    observe({
+        txt <- paste("Value above is:", input$mytext)
+        
+        # writing a result to the text box called myresults
+        updateTextInput(session = session, inputId = "myresults", value = txt)
+    })
+}    
+
+## user interface
+ui <- basicPage(
+    h3("An example of an update* function"),
+    
+    textInput(inputId = "mytext", label = "Input goes here"),
+    
+    textInput(inputId = "myresults", label = "Results will be printed here", value = "Initial value" )
+)
+
+## launch the app
+shinyApp(ui = ui, server = server)
+
+
+
+``` 
+
+#### Back to functions to read reactive values: featuring observe to generate side effects and no output
+
+- don't use `observe()` function to return data or values
+    - that's what the `reactive()` function is for
+
+```{r app-9, eval = FALSE}
+
+## load libraries
+library(shiny)
+
+## server
+server <- function(input, output, session) {
+    
+    observe({
+        updateTextInput(session = session, inputId = "myresults", value = input$mytext)
+
+    })
+}    
+
+## user interface
+ui <- basicPage(
+    h3("The value in the text box gets printed to the results text box."),
+    textInput(inputId = "mytext", label = "Input goes here"),
+    textInput(inputId = "myresults", label = "Results will be printed here", value = "Initial value")
+)
+
+## launch the app
+shinyApp(ui = ui, server = server)
+
+    
+```
+
+##### Example app: All the reactive values in observe will trigger the code to run (even if that’s not what you want)
+
+- an example of something that we don't want to do!
+
+```{r app-9, eval = FALSE}
+
+## load libraries
+library(shiny)
+
+## server
+server <- function(input, output, session) {
+    
+    observe({
+        # even though the slider ius not involved in a calculation, if the slider is changed
+        # it will run all this code and update the text box changes
+        # to the mxtext box also will trigger the code to run
+        input$myslider
+        txt <-  paste(input$mytext, sample(1:10000, 1))
+        updateTextInput(session = session, inputId = "myresults", value = txt)
+
+    })
+}    
+
+## user interface
+ui <- basicPage(
+    h3("The results textbox gets updated if we change the other textbox or the slider"),
+    sliderInput(inputId = "myslider", label = "A slider:", min = 0, max = 1000, value = 500),
+    textInput(inputId = "mytext", label = "Input goes here", value = "Initial value"),
+    textInput(inputId = "myresults", label = "Results will be printed here")
+)
+
+## launch the app
+shinyApp(ui = ui, server = server)
+
+    
+```
+
+
+##### Example app: Only specified reactive(s) trigger the code to run using observeEvent.
+
+- same code as above, but not using `observeEvent` instead of `observe` 
+
+```{r app-10, eval = FALSE}
+
+## load libraries
+library(shiny)
+
+## server
+server <- function(input, output, session) {
+    
+    # Using observeEvent we are telling Shiny only to run this code if mytext gets updated
+    observeEvent(eventExpr = input$mytext, {
+        
+        # myslider is a reactive object but it does not trigger the code to run
+        # here because we are using observeEvent and only specified
+        # input$mytext
+        input$myslider
+        txt <-  paste(input$mytext, sample(1:10000, 1))
+        updateTextInput(session = session, inputId = "myresults", value = txt)
+
+    })
+}    
+
+## user interface
+ui <- basicPage(
+    h3("The results text box only updated when you change the top text box."),
+    sliderInput(inputId = "myslider", label = "A slider:", min = 0, max = 1000, value = 500),
+    textInput(inputId = "mytext", label = "Input goes here", value = "Initial value"),
+    textInput(inputId = "myresults", label = "Results will be printed here")
+)
+
+## launch the app
+shinyApp(ui = ui, server = server)
+
+    
+```
+
+##### Observer priority: which observers run first
+
+- when no priority is specified, then second observer will run second and overwrite the first observer
+
+```{r app-11, eval = FALSE}
+
+## load libraries
+library(shiny)
+
+## server
+server <- function(input, output, session) {
+  
+  # With no priority specified the second observer will
+  # run second and overwrite the first observer
+  observe({
+    txtA <- paste("First observer", input$mytext)
+    updateTextInput(session, inputId = "myresults", value = txtA)
+  })
+  
+  observe({
+    txtB <- paste("Second observer", input$mytext)
+    updateTextInput(session, inputId = "myresults", value = txtB)
+  })
+  
+  
+}
+
+ui <- basicPage(
+  h3("Second observer runs second so it overwrites the first observer"),
+  textInput("mytext", "Input goes here"),
+  textInput("myresults", "Results will be printed here", "Initial value")
+)
+
+shinyApp(ui = ui, server = server)
+    
+    
+```
+
+##### Example app: Prioritize to control order of execution
+
+- use priority argument in `updateTextInput`
+
+```{r app-12, eval = FALSE}
+
+server <- function(input, output, session) {
+  
+  # first observer has lower priority so it runs second and will
+  # overwrite the other observer
+  observe({
+    txtA <- paste("First observer", input$mytext)
+    updateTextInput(session, inputId = "myresults", value = txtA)
+  }, priority = 1)
+  
+  # second observer has higher priority so it will run first and
+  # then be overwritten
+  observe({
+    txtB <- paste("Second observer", input$mytext)
+    updateTextInput(session, inputId = "myresults", value = txtB)
+  }, priority = 2)
+  
+}
+
+ui <- basicPage(
+  
+  h3("Priority is higher for second observer so it runs first and then gets written over by the first observer"),
+  textInput("mytext", "Input goes here"),
+  textInput("myresults", "Results will be printed here", "")
+)
+
+shinyApp(ui = ui, server = server)
+
+
+```
+
+#### reactive: use a reactive function to isolate code and generate output with no side effects
+
+```{r app-13, eval = FALSE}
+
+server <- function(input, output, session) {
+  
+  # this is my reactive function -- I'm using it to
+  # isolate reactions related to the text box
+  mystring <- reactive({
+    paste(input$mytext, " is what the user types")
+  })
+  
+  observe({
+    # The reactive will run each time the textbox changes and
+    # print results to the console.
+    txt <- mystring()
+    updateTextInput(session, inputId = "myresults", value = txt) 
+  })
+  
+}
+
+ui <- basicPage(
+  
+    h3("The reactive generates a string output which is added to the results text box"),
+    textInput("mytext", "Input goes here"),
+    textInput("myresults", "Results will be printed here", "")
+
+)
+
+shinyApp(ui = ui, server = server)
+
+
+
+```
+
+#### eventReactive: used to prevent unwanted reactions in a reactive function
+
+```{r app-14} 
+
+
+
+```
+

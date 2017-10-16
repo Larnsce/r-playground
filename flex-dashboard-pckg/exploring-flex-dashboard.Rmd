@@ -1,0 +1,11 @@
+---
+title: "Exploring flexdashboard"
+author: "Lars Schoebitz"
+date: "June 14, 2017"
+output: html_document
+---
+
+# Intro
+
+Start with following website: http://rmarkdown.rstudio.com/flexdashboard/
+

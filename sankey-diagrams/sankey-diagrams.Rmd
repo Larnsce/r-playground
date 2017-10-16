@@ -5,6 +5,13 @@ date: "14 February 2017"
 output: html_document
 ---
 
+```{r}
+
+library(googleVis)
+library(tidyverse)
+```
+
+
 I have been trying to build sankey diagrams in R for a long time now and it has never really worked out for me. I will document the steps I am going through this time better to understand what my specific problems and questions are.
 
 # Sankey with GoogleVis
@@ -34,7 +41,8 @@ UKvisits <- data.frame(origin=c(
 # install.packages(c("devtools","RJSONIO", "knitr", "shiny", "httpuv"))
 # library(devtools)
 # install_github("mages/googleVis")
-require(googleVis)
+
+
 plot(
   gvisSankey(UKvisits, from="origin", 
              to="visit", weight="weight",
@@ -50,8 +58,6 @@ Now let me try and use a dataframe that I created myself
 
 ```{r}
 
-library(googleVis)
-library(readr)
 
 data <- read_csv(file = "data.csv")
 

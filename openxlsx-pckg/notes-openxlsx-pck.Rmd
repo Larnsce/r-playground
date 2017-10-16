@@ -1,0 +1,81 @@
+---
+title: "openxlsx-package"
+author: "Lars Schoebitz"
+date: "24 May 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+Code that I am playing around with here is taken from:
+
+https://cran.r-project.org/web/packages/openxlsx/vignettes/Introduction.pdf
+
+```{r}
+
+library(openxlsx)
+library(tidyverse)
+
+```
+
+## Overview of functions
+
+### Write to working directory
+
+Writes the iris datset (dataframe) into a worksheet and names the file as specified in the file argument. 
+
+Does not give the worksheet a name.
+
+```{r}
+
+write.xlsx(iris, file = "writeXLSX1.xlsx")
+
+```
+
+
+### Write several dataframes
+
+Write a list of data.frames to individual worksheets using list names as worksheet names.
+
+```{r}
+
+l <- list("IRIS" = iris, "MTCARS" = mtcars)
+
+write.xlsx(l, file = "writeXLSX2.xlsx")
+
+
+
+```
+
+### Styling parameters
+
+`write.xlsx` also accepts styling parameters. The simplest way is to set default options and set column class.
+
+
+```{r}
+
+options("openxlsx.borderColour" = "#4F80BD")
+options("openxlsx.borderStyle" = "thin")
+options("openxlsx.dateFormat" = "mm/dd/yyyy")
+options("openxlsx.datetimeFormat" = "yyyy-mm-dd hh:mm:ss")
+options("openxlsx.numFmt" = NULL) ## For default style rounding of numeric columns
+df <- data.frame("Date" = Sys.Date()-0:19, "LogicalT" = TRUE,
+"Time" = Sys.time()-0:19*60*60,
+"Cash" = paste("$",1:20), "Cash2" = 31:50,
+"hLink" = "https://CRAN.R-project.org/",
+"Percentage" = seq(0, 1, length.out=20),
+"TinyNumbers" = runif(20) / 1E9, stringsAsFactors = FALSE)
+class(df$Cash) <- "currency"
+class(df$Cash2) <- "accounting"
+class(df$hLink) <- "hyperlink"
+class(df$Percentage) <- "percentage"
+class(df$TinyNumbers) <- "scientific"
+write.xlsx(df, "writeXLSX3.xlsx")
+write.xlsx(df, file = "writeXLSXTable3.xlsx", asTable = TRUE)
+
+```
+

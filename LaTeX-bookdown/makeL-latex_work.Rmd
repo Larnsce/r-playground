@@ -1,0 +1,28 @@
+---
+title: "LaTeX for Ubuntu"
+author: "Lars Schoebitz"
+date: "July 6, 2017"
+output: html_document
+---
+
+# Issue ressolved
+
+First install, following these instructions:
+
+http://tipsonubuntu.com/2016/09/16/install-tex-live-2016-ubuntu-16-04-14-04/
+
+Errors.
+
+Then, follow these instructions:
+
+https://askubuntu.com/questions/883918/how-can-i-upgrade-latexmk-why-very-old-version-is-contained-in-ubuntu-reposito#883925
+
+      cp latexmk.pl $HOME/bin/latexmk 
+      chmod +x $HOME/bin/latexmk 
+
+Errors in bookdown with references.
+
+Look through this: https://github.com/rstudio/bookdown/issues/121
+Solution at the bottom of page:
+
+- add `tables: yes` to YAML metadata at top level option.

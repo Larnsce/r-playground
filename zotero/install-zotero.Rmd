@@ -1,0 +1,75 @@
+---
+title: "Installing Zotero on Ubuntu for R"
+output: html_document
+---
+
+# Install Zotero on Ubuntu
+
+Basic steps for installation:
+
+http://www.cogsci.nl/qnotero#install-zotero-standalone-on-linux
+
+
+Very helpful discussion on installation problems.
+
+https://forums.zotero.org/discussion/31020/profile-missing-error-after-update-to-409-on-linux/
+
+
+$ sudo apt-get remove zotero-standalone
+$ sudo rm -rf ~/.zotero; sudo rm -rf ~/.cache/zotero
+$ sudo apt-get install zotero-standalone
+$ zotero
+
+For anyone else reading this: the above instructions might delete your Zotero data directory, depending on where you have it stored. You're better off fixing the permissions on ~/.zotero instead of removing it (and not running Zotero as root). 
+
+# Install addons for R
+
+## BibTex
+
+https://github.com/retorquere/zotero-better-bibtex/wiki/Installation
+
+https://github.com/retorquere/zotero-better-bibtex/releases/tag/1.6.97
+
+*Select pre-relase version v5.0.28 for Zotero 5*
+
+https://github.com/retorquere/zotero-better-bibtex/releases
+
+save file as... then open in Zotero
+
+## Set-up BibText
+
+- go to Preferences
+- Export
+        - set Default Format to "Better BibTex Citation Key Quick Copy"
+- go to Better BibTex
+        - se QuickCopy format to "Pandoc"
+
+## Updated guide
+
+https://forums.zotero.org/discussion/comment/214068/
+
+## Zotfile
+
+http://zotfile.com/#install-zotfile
+
+
+save file as... then open in Zotero
+
+## Use with R and R Markdown
+
+https://github.com/bbest/rmarkdown-example
+
+## Use citr package with R Markdown
+
+https://github.com/crsh/citr
+
+Make keyboard shortcut:
+
+- Tools -> Addins -> Browse Addins -> Keyboard Shortcuts -> Click field and enter wished shortcut (I use Alt+Shift+R)
+
+
+
+
+
+
+
