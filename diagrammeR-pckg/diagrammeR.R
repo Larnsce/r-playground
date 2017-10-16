@@ -14,6 +14,7 @@ rm(list = ls())
 ###
 
 library(DiagrammeR)
+library(tidyverse)
 
 # Create the graph object
 graph <- create_graph()
@@ -57,7 +58,8 @@ node2 <- create_node_df(
   shape = "rectangle"
 )
 
-graph <- create_graph(nodes_df = node1)
+
+graph <- create_graph(nodes_df = node2)
 
 render_graph(graph)
 
@@ -90,15 +92,11 @@ edges <-
 graph <-
   create_graph(
     nodes_df = nodes,
-    edges_df = edges,
-    graph_attrs = "layout = neato",
-    node_attrs = "fontname = Helvetica",
-    edge_attrs = "color = gray20")
+    edges_df = edges)
 
 # View the graph
 render_graph(graph)
 
-?create_graph
 
 ndf <-
   create_node_df(
@@ -152,6 +150,8 @@ graphD <-
     nodes_df = comp_d,
     edges_df = edf_d)
 
+
+
 render_graph(graphD, output = "visNetwork")
 
 
@@ -200,3 +200,64 @@ graphA <-
 
 render_graph(graphA)
 
+
+
+library(DiagrammeR)
+
+DiagrammeR::create
+
+# Create a node data frame
+nodes <-
+    create_node_df(
+        n = 4,
+        nodes = c("a", "b", "c", "d"),
+        label = FALSE,
+        type = "lower",
+        style = "filled",
+        color = "aqua",
+        shape = c("circle", "circle",
+                  "rectangle", "rectangle"),
+        data = c(200, 2.6, 9.4, 2.7))
+
+edges <-
+    create_edge_df(
+        from = c(1, 2, 3),
+        to = c(4, 3, 1),
+        rel = "leading_to")
+
+
+graph <-
+    create_graph(
+        nodes_df = nodes,
+        edges_df = edges)
+
+render_graph(graph, layout = "tree")
+
+### sdg 6.3.1 work
+
+nodes_ww <- create_node_df(
+    n = 5,
+    nodes = c("perc ww treated", "perc ww treated domestic", "perc ww treated non-domestic", "perc ww treated non-domestic non-hazardous", "perc ww treated non-domestic hazardous"),
+    label = TRUE,
+    type = "lower",
+    style = "filled",
+    color = "aqua",
+    shape = c("rectangle")
+)
+
+edges_ww <- create_edge_df(
+    from = c(1, 1, 3, 3),
+    to = c(2, 3, 4, 5),
+    rel = "leading_to")
+
+
+
+nodes_ww <- read.csv(file = "/home/larnsce/Dropbox/R/sdg-631/data/gather-source/diagramm/node_df.csv")
+edges_ww <- read.csv(file = "/home/larnsce/Dropbox/R/sdg-631/data/gather-source/diagramm/edge_df.csv")
+
+graph_ww <- create_graph(
+    nodes_df = nodes_ww,
+    edges_df = edges_ww)
+
+
+render_graph(graph_ww, layout = "tree")
