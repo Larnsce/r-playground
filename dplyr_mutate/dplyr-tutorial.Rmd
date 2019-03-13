@@ -21,5 +21,7 @@ Use dplyr mutate in a pipe to change classes of variables !!!
     percent = as.integer(perc)
   )
 
+
+
 ```
 

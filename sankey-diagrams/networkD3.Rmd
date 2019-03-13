@@ -1,0 +1,44 @@
+---
+title: "networkD3"
+author: "Lars Schoebitz"
+date: "August 7, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+# Load package
+library(networkD3)
+
+# Create fake data
+src <- c("A", "A", "A", "A",
+        "B", "B", "C", "C", "D")
+target <- c("B", "C", "D", "J",
+            "E", "F", "G", "H", "I")
+networkData <- data.frame(src, target)
+
+# Plot
+simpleNetwork(networkData)
+
+```
+
+```{r}
+
+# Load energy projection data
+# Load energy projection data
+URL <- paste0(
+        "https://cdn.rawgit.com/christophergandrud/networkD3/",
+        "master/JSONdata/energy.json")
+Energy <- jsonlite::fromJSON(URL)
+# Plotsource
+sankeyNetwork(Links = Energy$links, Nodes = Energy$nodes, Source = "source",
+             Target = "target", Value = "value", NodeID = "name",
+             units = "TWh", fontSize = 12, nodeWidth = 30)
+
+
+```
+

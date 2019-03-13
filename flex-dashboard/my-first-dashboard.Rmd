@@ -1,0 +1,63 @@
+---
+title: "My first dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+
+library(flexdashboard)
+library(DT)
+
+```
+
+Row
+-------------------------------------
+    
+### Chart 2
+    
+```{r, fig.width=5, fig.height=5}
+plot(pressure)
+```
+    
+### Chart 3
+
+```{r, fig.width=5, fig.height=5}
+plot(airmiles)
+```
+
+Row
+-------------------------------------
+
+### Table 1
+
+```{r}
+knitr::kable(mtcars)
+```
+
+### Table 2
+
+```{r}
+datatable(mtcars, options = list(
+  bPaginate = FALSE
+))
+```
+
+Row
+-------------------------------------
+
+### Table 3
+
+```{r}
+
+datatable(mtcars, options = list(
+  pageLength = 25
+))
+
+```
+
+
+
+

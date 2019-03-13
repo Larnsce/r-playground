@@ -1,0 +1,10 @@
+---
+title: "How to Branch and Merge"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
