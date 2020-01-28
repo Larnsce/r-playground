@@ -1,0 +1,86 @@
+---
+title: "A Multi-page HTML Document"
+author: "Lars Schoebitz"
+date: "`r Sys.Date()`"
+output:
+  pagedown::html_paged: 
+    css: ["CSS/custom-fonts.css", "CSS/custom-page.css", "CSS/custom.css"]
+    #front_cover: !expr system.file("img", "Rlogo.png", package="png")
+    #back_cover: https://www.r-project.org/Rlogo.png
+    toc: true
+    toc-title: "My TOC"
+    lot: true
+    # default: "List of Tables"
+    lot-title: "Tables"
+    lof: true
+    # default: "List of Figures"
+    lof-title: "Figures"
+chapter_name: ["CHAPTER\\ ", "."]
+paged-footnotes: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+## Learning resource: https://www.r-project.ro/conference2019/presentations/Lesur2.pdf
+## make a copy of default stylesheets
+
+# files <- c("default-fonts", "default-page", "default")
+# from <- pagedown:::pkg_resource(paste0("css/", files, ".css"))
+# to <- c("CSS/custom-fonts.css", "CSS/custom-page.css", "CSS/custom.css")
+# file.copy(from = from, to = to)
+
+```
+
+
+
+
+:::front-cover
+# My great book about
+:::
+
+:::back-cover
+### Written with love
+:::
+
+
+# Introduction
+
+This is an example of a multi-page HTML document. See https://pagedown.rbind.io for the full documentation. The rest of this document is random text.
+
+# Random text {.chapter}
+
+## Second level heading
+
+Basic text
+
+## A plot
+
+Refer to Figure \@ref(fig:plot1) in the text.
+
+```{r plot1, fig.cap="Caption for Plot 1"}
+
+library(tidyverse)
+
+ggplot(mtcars, aes(x = cyl, y = mpg, group = cyl)) +
+    geom_boxplot()
+
+```
+
+## A table
+
+Refer to Table \@ref(tab:table1) in the text.
+
+```{r table1, }
+
+
+knitr::kable(head(iris[, -5]), caption = 'An example table.')
+
+```
+
+## Hyperlinks and footnotes
+
+Here is a hyperlink to [my website](www.lse.de). Another website^[www.lse.de] link.
