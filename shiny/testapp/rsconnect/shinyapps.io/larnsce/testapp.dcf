@@ -1,0 +1,12 @@
+name: testapp
+title: testapp
+username:
+account: larnsce
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1009986
+bundleId: 2197115
+url: https://larnsce.shinyapps.io/testapp/
+when: 1562163619.11359
+asMultiple: FALSE
+asStatic: FALSE
