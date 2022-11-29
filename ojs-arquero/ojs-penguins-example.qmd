@@ -1,0 +1,95 @@
+---
+title: "Penguins"
+format:
+  html:
+    toc: false
+    echo: true
+    keep-hidden: true
+    code-tools: true
+execute: 
+  freeze: true
+---
+
+# Note
+
+To see the live document, run:
+
+> $ python3 -m http.server
+
+in the Terminal, then browse (paste it into your browser)
+
+> 127.0.0.1:8000
+
+and navigate to the HTML file that you rendered.
+
+Help from: https://github.com/quarto-dev/quarto-cli/issues/3446#issuecomment-1326596133
+
+# Palmer Penguins Example
+
+A simple example based on Allison Horst's [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/) dataset. Here we look at how penguin body mass varies across both sex and species (use the provided inputs to filter the dataset by bill length and island):
+
+```{ojs}
+2 * 3
+```
+
+
+```{ojs}
+//| panel: input
+viewof bill_length_min = Inputs.range(
+  [32, 50], 
+  {value: 35, step: 1, label: "Bill length (min):"}
+)
+viewof islands = Inputs.checkbox(
+  ["Torgersen", "Biscoe", "Dream"], 
+  { value: ["Torgersen", "Biscoe"], 
+    label: "Islands:"
+  }
+)
+```
+
+::: {.panel-tabset}
+
+## Plot
+
+```{ojs}
+Plot.rectY(filtered, 
+  Plot.binX(
+    {y: "count"}, 
+    {x: "body_mass_g", fill: "species", thresholds: 20}
+  ))
+  .plot({
+    facet: {
+      data: filtered,
+      x: "sex",
+      y: "species",
+      marginRight: 80
+    },
+    marks: [
+      Plot.frame(),
+    ]
+  }
+)
+```
+
+## Data
+
+```{ojs}
+Inputs.table(filtered)
+```
+
+:::
+
+```{ojs}
+data = FileAttachment("penguins.csv").csv({ typed: true })
+```
+
+```{ojs}
+filtered = data.filter(function(penguin) {
+  return bill_length_min < penguin.bill_length_mm &&
+         islands.includes(penguin.island);
+})
+```
+
+# Reference
+
+Example taken from: https://quarto.org/docs/interactive/ojs/examples/penguins.html

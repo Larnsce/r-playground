@@ -1,0 +1,134 @@
+---
+title: "Untitled"
+format: html
+editor: source
+editor_options: 
+  chunk_output_type: console
+---
+
+# Resources
+
+- https://observablehq.com/@observablehq/data-wrangling-with-arquero-from-r
+- https://quarto.org/docs/interactive/ojs/
+
+# Goal
+
+Reproduce examples from a slideshow that let's me show a plot from a Google Forms survey instantanously on a slide.
+
+- https://github.com/larnsce/talk-runapp-quarto-2022/blob/main/index.qmd#L154
+- https://github.com/larnsce/talk-runapp-quarto-2022/blob/main/index.qmd#L448
+
+# Get started
+
+```{r}
+library(palmerpenguins)
+library(tidyverse)
+
+penguins <- penguins
+ojs_define(data = penguins)
+```
+
+```{ojs}
+2 * 3
+```
+
+```{r}
+df <- data.frame(
+  year = 1961:1990,
+  max = runif(30, -10, 20) |> cumsum()
+  )
+
+ojs_define(df = df)
+```
+
+```{ojs}
+Inputs.table(transpose(df), { sort: "year", reverse: true })
+```
+
+```{ojs}
+Plot.plot({
+  marks: [
+    Plot.line(transpose(df), {x: "year", y: "max"})
+  ]
+})
+```
+
+# Live Google Sheet Example
+
+```{ojs}
+md`## Poll results (Respondents: ${respondentCount})`
+```
+
+```{ojs}
+import { liveGoogleSheet } from "@jimjamslam/live-google-sheet";
+import { aq, op } from "@uwdata/arquero";
+
+surveyResults = liveGoogleSheet(
+  "https://docs.google.com/spreadsheets/d/e/" +
+    "2PACX-1vQy00FtSctLJDk0x6IuBhAgSzc21miDTB3MLjg3zJpx8kMqR2dnjAj4i0hmXlFUCz5VK7ae_ZSHa63_/" +
+    "pub?gid=2042451149&single=true&output=csv",
+  15000, 2, 3);
+
+respondentCount = surveyResults.length;
+
+
+```
+
+```{ojs}
+// get the counts of people using and interested in tools
+countsUsed = aq.from(surveyResults)
+  .derive({ used: d => op.split(d.responseUsed, ", ") })
+  .select("used")
+  .unroll("used")
+  .groupby("used")
+  .count()
+  .derive({ measure: d => "Have used" })
+  .rename({ used: "tool" })
+```
+
+```{ojs}
+countsWant = aq.from(surveyResults)
+  .derive({ want: d => op.split(d.responseWant, ", ") })
+  .select("want")
+  .unroll("want")
+  .groupby("want")
+  .count()
+  .derive({ measure: d => "Want to learn" })
+  .rename({ want: "tool" })
+```
+
+```{ojs}
+// combine the two counts into one dataset again
+countsAll = [...countsUsed.objects(), ...countsWant.objects()];
+
+plotUsed = Plot.plot({
+  marks: [
+    Plot.barX(countsAll, { y: "tool", x: "count", fill: "tool" }),
+    Plot.ruleX([respondentCount], { stroke: "#ffffff99" })
+  ],
+  x : { label: "" },
+  y : { label: "", tickSize: 0 },
+  facet: { data: countsAll, x: "measure", label: "" },
+  marginLeft: 140,
+  style: {
+    width: 1350,
+    height: 500,
+    fontSize: 12,
+  }
+});
+```
+
+## How to create a live Google Sheet
+
+That was pretty straight forward. File -> Share -> Publish to Web
+
+## How to QUERY the form response to get custom column names
+
+https://webapps.stackexchange.com/a/130490
+
+- Make a new sheet
+- Call it QUERY
+- decide for your column names
+- then use `QUERY()` formula and select the column headings in "Form Responses 1" Sheet
+- then, File -> Share -> Publish to Web
+
